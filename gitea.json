@@ -1,0 +1,96 @@
+{
+    "gitea": {
+        "description": "Gitea is a community managed painless self-hosted Git service",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://gitea.com/",
+        "version": "1.0",
+        "containers": {
+            "gitea": {
+                "image": "gitea/gitea",
+                "launch_order": 1,
+                "args": [
+                    [
+                        "-v",
+                        "/etc/timezone:/etc/timezone:ro"
+                    ],
+                    [
+                        "-v",
+                        "/etc/localtime:/etc/localtime:ro"
+                    ],
+                    [
+                        "-e",
+                        "RUN_MODE=prod"
+                    ]
+                ],
+                "ports": {
+                    "3000": {
+                        "description": "Gitea web UI port. Suggested default: 3000",
+                        "host_default": 3000,
+                        "label": "Web port",
+                        "protocol": "tcp",
+                        "ui": true
+                    },
+                    "22": {
+                        "description": "SSH port. Suggested default: 222",
+                        "host_default": 222,
+                        "label": "SSH port",
+                        "protocol": "tcp",
+                        "ui": false
+                    }
+                },
+                "volumes": {
+                    "/data": {
+                        "description": "Choose a Share for all gitea data. Eg: create a Share called gitea for this purpose.",
+                        "label": "Data",
+                        "min_size": 1073741824
+                    }
+                },
+                "environment": {
+                    "USER_UID": {
+                        "label": "User",
+                        "description": "User that owns the gitea volume",
+                        "index": 1
+                    },
+                    "USER_GID": {
+                        "label": "Group",
+                        "description": "Group the user owning the gitea volume is in.",
+                        "index": 2
+                    },
+                    "APP_NAME": {
+                        "label": "Instance name",
+                        "description": "Name of the gitea instance, used in the page title. Default: Gitea: Git with a cup of tea",
+                        "index": 3
+                    },
+                    "SSH_PORT": {
+                        "label": "Exposed SSH port",
+                        "description": "SSH port displayed in clone URL. Default: 22",
+                        "index": 4
+                    },
+                    "SSH_DOMAIN": {
+                        "label": "SSH Domain",
+                        "description": "Domain name of this server, used for the displayed clone URL in Gitea’s UI. Default: localhost",
+                        "index": 5
+                    },
+                    "LFS_START_SERVER": {
+                        "label": "git-lfs support",
+                        "description": "Enables git-lfs support. Default: false",
+                        "index": 6
+                    },
+                    "DISABLE_REGISTRATION": {
+                        "label": "Disable registration",
+                        "description": "Disable registration, after which only admin can create accounts for users. Default: false",
+                        "index": 7
+                    },
+                    "REQUIRE_SIGNIN_VIEW": {
+                        "label": "Require sign in",
+                        "description": "Enable this to force users to log in to view any page. Default: false",
+                        "index": 8
+                    }
+                }
+            }
+        },
+        "more_info": "<p>To set up, visit the web UI.</p>"
+    }
+}

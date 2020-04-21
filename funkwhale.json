@@ -1,0 +1,78 @@
+{
+    "funkwhale": {
+        "description": "A social platform to enjoy and share music",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://funkwhale.audio/",
+        "version": "0.21-rc1",
+        "containers": {
+            "funkwhale": {
+                "image": "funkwhale/all-in-one",
+                "tag": "0.21-rc1",
+                "args": [
+                    [
+                        "-e",
+                        "FUNKWHALE_API_IP=127.0.0.1"
+                    ],
+                    [
+                        "-e",
+                        "NESTED_PROXY=1"
+                    ]
+                ],
+                "launch_order": 1,
+                "ports": {
+                    "80": {
+                        "description": "Funkwhale port for the API and web interface. Suggested default: 5000",
+                        "host_default": 5000,
+                        "label": "Funkwhale port",
+                        "protocol": "tcp",
+                        "ui": true
+                    }
+                },
+                "volumes": {
+                    "/data": {
+                        "description": "Choose a Share for all funkahwle data. Eg: create a Share called funkwhale for this purpose.",
+                        "label": "Data",
+                        "min_size": 1073741824
+                    }
+                },
+                "environment": {
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_API_PORT": {
+                        "label": "Exposed port",
+                        "description": "Port that the instance is exposed on to the network."
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "PUID": {
+                        "label": "User",
+                        "description": "User that owns the funkwhale volume"
+                    },
+                    "GUID": {
+                        "label": "Group",
+                        "description": "Group the user owning the funkwhale volume is in. Official documentation suggests that this is the docker group."
+                    },
+                    "MEDIA_URL": {
+                        "label": "Media URL",
+                        "description": "Exposed URL for media. Should end with /media/."
+                    }
+                }
+            }
+        },
+        "more_info": "<p>Create an admin user using <code>docker exec -it funkwhale manage createsuperuser</code></p>"
+    }
+}
