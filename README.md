@@ -10,5 +10,5 @@ As per [official docs](http://rockstor.com/docs/docker-based-rock-ons/overview.h
 
 | rockon | usability | working |
 |--------|-----------|---------|
-| funkwhale | env config and user setup is a bit cumbersome| :white_check_mark: |
-| gitea | easy - env vs. setup config a bit confusing | :white_check_mark: |
+| funkwhale | env config and user setup is a bit cumbersome| :heavy_check_mark: |
+| gitea | easy - env vs. setup config a bit confusing | :heavy_check_mark: |
