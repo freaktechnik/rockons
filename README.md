@@ -14,5 +14,5 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 
 | rockon | usability | working |
 |--------|-----------|---------|
-| funkwhale | env config and user setup is a bit cumbersome| :heavy_check_mark: |
+| funkwhale | env config and user setup is a bit cumbersome | :heavy_check_mark: |
 | gitea | easy - env vs. setup config a bit confusing | :heavy_check_mark: |

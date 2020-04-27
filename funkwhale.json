@@ -5,11 +5,10 @@
             "slug": ""
         },
         "website": "https://funkwhale.audio/",
-        "version": "0.21-rc2",
+        "version": "0.21",
         "containers": {
             "funkwhale": {
                 "image": "funkwhale/all-in-one",
-                "tag": "0.21-rc2",
                 "args": [
                     [
                         "-e",
