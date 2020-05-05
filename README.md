@@ -16,3 +16,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 |--------|-----------|---------|
 | funkwhale | env config and user setup is a bit cumbersome | :heavy_check_mark: |
 | gitea | easy - env vs. setup config a bit confusing | :heavy_check_mark: |
+| huginn | not used it much yet, possibly missing an env var to add additional agents | :heavy_check_mark: |

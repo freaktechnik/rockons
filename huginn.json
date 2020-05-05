@@ -1,0 +1,53 @@
+{
+    "huginn": {
+        "description": "Create agents that monitor and act on your behalf. Your agents are standing by!",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/huginn/huginn",
+        "version": "1.0",
+        "containers": {
+            "huginn": {
+                "image": "huginn/huginn",
+                "launch_order": 1,
+                "args": [
+                    [
+                        "-e",
+                        "RAILS_ENV=production"
+                    ]
+                ],
+                "ports": {
+                    "3000": {
+                        "description": "Huginn web UI port. Suggested default: 3000",
+                        "host_default": 3000,
+                        "label": "WebUI port",
+                        "protocol": "tcp",
+                        "ui": true
+                    }
+                },
+                "volumes": {
+                    "/var/lib/mysql": {
+                        "description": "Choose a Share for the database. Share onwer must have UID 1001, or it must be world-writeable. Eg: create a Share called huginn-db for this purpose.",
+                        "label": "Database",
+                        "min_size": 1073741824
+                    }
+                },
+                "environment": {
+                    "TIMEZONE": {
+                        "label": "Name of the timezone to run in",
+                        "description": "Try a city name, alternatively install all the ruby deps of huginn and run rake time:zones:all... Or maybe UTC +HH:MM works but without DST? Default: Pacific Time (US & Canada)"
+                    },
+                    "DOMAIN": {
+                        "label": "Domain (including port)",
+                        "description": "Domain without protocol but with port where huginn will be running"
+                    },
+                    "INVITATION_CODE": {
+                        "label": "New user invite code",
+                        "description": "Code new users have to know to create an account. Default: try-huginn"
+                    }
+                }
+            }
+        },
+        "more_info": "<p>Default username is <code>admin</code> and password is <code>password</code></p>"
+    }
+}
