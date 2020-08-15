@@ -31,7 +31,7 @@
                 },
                 "volumes": {
                     "/data": {
-                        "description": "Choose a Share for all funkahwle data. Eg: create a Share called funkwhale for this purpose.",
+                        "description": "Choose a Share for all funkwhale data. Eg: create a Share called funkwhale for this purpose.",
                         "label": "Data",
                         "min_size": 1073741824
                     }
