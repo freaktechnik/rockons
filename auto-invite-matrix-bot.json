@@ -1,0 +1,29 @@
+{
+    "auto-invite-matrix-bot": {
+        "description": " A small matrix bot to redirect people.",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/MTRNord/auto-invite-matrix-bot",
+        "version": "1.0",
+        "containers": {
+            "auto-invite-matrix-bot": {
+                "image": "freaktechnik/auto-invite-matrix-bot",
+                "launch_order": 1,
+                "args": [
+                    [ "--tmpfs", "/tmp" ]
+                ],
+                "volumes": {
+                    "/data": {
+                        "description": "Choose a Share for the configuartion. Eg: create a Share called auto-invite-matrix-bot for this purpose.",
+                        "label": "Configuration"
+                    }
+                },
+                "cmd_arguments": [
+                    [ "auto-invite-matrix-bot", "--config=/data/config.yaml" ]
+                ]
+            }
+        },
+        "more_info": "<p>The configuration should be in a config.yaml in the root of the share.</p>"
+    }
+}
