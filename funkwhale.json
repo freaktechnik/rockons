@@ -9,7 +9,7 @@
         "containers": {
             "funkwhale": {
                 "image": "funkwhale/all-in-one",
-                "args": [
+                "opts": [
                     [
                         "-e",
                         "FUNKWHALE_API_IP=127.0.0.1"

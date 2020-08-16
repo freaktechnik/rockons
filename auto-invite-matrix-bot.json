@@ -10,7 +10,7 @@
             "auto-invite-matrix-bot": {
                 "image": "freaktechnik/auto-invite-matrix-bot",
                 "launch_order": 1,
-                "args": [
+                "opts": [
                     [ "--tmpfs", "/tmp" ]
                 ],
                 "volumes": {

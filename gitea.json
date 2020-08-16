@@ -10,7 +10,7 @@
             "gitea": {
                 "image": "gitea/gitea",
                 "launch_order": 1,
-                "args": [
+                "opts": [
                     [
                         "-v",
                         "/etc/timezone:/etc/timezone:ro"

@@ -17,15 +17,7 @@
         "containers": {
             "matrix-synapse": {
                 "image": "matrixdotorg/synapse",
-                "args": [
-                    [
-                        "-e",
-                        "FUNKWHALE_API_IP=127.0.0.1"
-                    ],
-                    [
-                        "-e",
-                        "NESTED_PROXY=1"
-                    ],
+                "opts": [
                     [
                         "--link",
                         "synapse-postgres:synapse-postgres"
@@ -66,7 +58,7 @@
             "synapse-postgres": {
                 "image": "postgres",
                 "tag": "12-alpine",
-                "args": [
+                "opts": [
                     [
                         "-e",
                         "POSTGRES_USER=synapse"

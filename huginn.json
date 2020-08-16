@@ -10,7 +10,7 @@
             "huginn": {
                 "image": "huginn/huginn",
                 "launch_order": 1,
-                "args": [
+                "opts": [
                     [
                         "-e",
                         "RAILS_ENV=production"
