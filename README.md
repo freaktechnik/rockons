@@ -21,3 +21,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | auto-invite-matrix-bot | need to manually add the config to the share. | :heavy_check_mark: |
 | wallabag | submitted to the official rockon registry | :heavy_check_mark: |
 | dnscrypt-proxy | requires configuration file to be manually created in config share for best experience. | :heavy_check_mark: |
+| vikunja | Uses sqlite, so not well suited for multi-user operation. In order to create an initial account, registration has to be allowed, after that you have to re-create the rockon with registration forbidden if you don't want strangers to be able to sign up | :heavy_check_mark: |     
