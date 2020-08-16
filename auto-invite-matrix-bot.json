@@ -1,6 +1,6 @@
 {
     "auto-invite-matrix-bot": {
-        "description": " A small matrix bot to redirect people.",
+        "description": "A small matrix bot to redirect people.",
         "ui": {
             "slug": ""
         },
