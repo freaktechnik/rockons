@@ -1,0 +1,33 @@
+{
+    "dnscrypt-proxy": {
+        "description": "dnscrypt-proxy is a flexible DNS proxy, with support for encrypted DNS protocols.",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/DNSCrypt/dnscrypt-proxy",
+        "version": "1.0",
+        "containers": {
+            "dnscrypt-proxy": {
+                "image": "klutchell/dnscrypt-proxy",
+                "launch_order": 1,
+                "ports": {
+                    "5053": {
+                        "label": "Server port",
+                        "description": "Port to run the service on. Defaults to 53",
+                        "host_default": 53
+                    },
+                    "3000": {
+                        "label": "DoH query",
+                        "description": "Port for DoH queries"
+                    }
+                },
+                "volumes": {
+                    "/config": {
+                        "label": "Config",
+                        "description": "Share containing the DNSCrypt-proxy configuration."
+                    }
+                }
+            }
+        }
+    }
+}
