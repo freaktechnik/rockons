@@ -9,6 +9,7 @@
         "containers": {
             "gitea": {
                 "image": "gitea/gitea",
+                "tag": "1",
                 "launch_order": 1,
                 "opts": [
                     [
@@ -22,6 +23,10 @@
                     [
                         "-e",
                         "RUN_MODE=prod"
+                    ],
+                    [
+                        "-e",
+                        "SSH_LISTEN_PORT=22"
                     ]
                 ],
                 "ports": {
