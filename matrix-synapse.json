@@ -5,7 +5,7 @@
             "slug": ""
         },
         "website": "https://matrix.org/",
-        "version": "1.0",
+        "version": "1.3",
         "container_links": {
             "matrix-synapse": [
                 {
@@ -94,23 +94,25 @@
             "synapse-coturn": {
                 "image": "instrumentisto/coturn",
                 "launch_order": 3,
+                "opts": [
+                    [
+                        "--network",
+                        "host"
+                    ]
+                ],
                 "volumes": {
                     "/config": {
-                        "description": "Directory containing the turnserver.conf file.",
+                        "description": "Directory containing the turnserver.conf file and sqlite DB.",
                         "label": "Coturn Config"
-                    }
-                },
-                "ports": {
-                    "3478": {
-                        "description": "Primary port coturn uses to punch holes. Defaults to 3478",
-                        "label": "Primary TURN port",
-                        "host_default": 3478
                     }
                 },
                 "cmd_arguments": [
                     [ "-c", "/config/turnserver.conf" ],
                     [ "--no-tcp-relay", "" ],
-                    [ "--use-auth-secret", "" ]
+                    [ "--use-auth-secret", "" ],
+                    [ "-b", "/config/data.sqlite" ],
+                    [ "-X", "$(detect-external-ip)" ],
+                    [ "--no-cli", "" ]
                 ],
                 "environment": {
                     "GID": {
