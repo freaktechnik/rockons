@@ -1,0 +1,33 @@
+{
+    "mautrix-telegram": {
+        "description": "A Matrix-Telegram hybrid puppeting/relaybot bridge",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/tulir/mautrix-telegram",
+        "version": "1.0",
+        "containers": {
+            "mautrix-telegram": {
+                "image": "dock.mau.dev/tulir/mautrix-telegram",
+                "launch_order": 1,
+                "ports": {
+                    "29317": {
+                        "description": "Appservice port. Suggested default: 29317",
+                        "host_default": 29317,
+                        "label": "Port",
+                        "protocol": "tcp",
+                        "ui": false
+                    }
+                },
+                "volumes": {
+                    "/data": {
+                        "description": "Choose a Share for all the bridge data. Eg: create a Share called mautrix-telegram for this purpose.",
+                        "label": "Data",
+                        "min_size": 1073741824
+                    }
+                }
+            }
+        },
+        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-telegram/wiki/Bridge-setup-with-Docker\">on the project wiki</a>.</p>"
+    }
+}
