@@ -8,7 +8,7 @@
         "version": "1.0",
         "containers": {
             "webthings-gateway": {
-                "image": "mozillaiot/gateway",
+                "image": "webthingsio/gateway",
                 "launch_order": 1,
                 "opts": [
                     [
