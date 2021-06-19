@@ -1,0 +1,94 @@
+{
+    "mautrix-signal": {
+        "description": "A Matrix-Signal puppeting bridge ",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/tulir/mautrix-signal",
+        "version": "1.0",
+        "container_links": {
+            "mautrix-signal": [
+                {
+                    "name": "db",
+                    "source_container": "mautrix-signal-db"
+                }
+            ]
+        },
+        "containers": {
+            "mautrix-signal-db": {
+                "image": "postgres",
+                "launch_order": 2,
+                "opts": [
+                    [
+                        "-e",
+                        "POSTGRES_USER=mautrixsignal"
+                    ],
+                    [
+                        "-e",
+                        "POSTGRES_DB=mautrixsignal"
+                    ]
+                ],
+                "volumes": {
+                    "/var/lib/postgresql/data": {
+                        "description": "Choose a Share for the bridge database data. Eg: create a Share called mautrix-signal-db for this purpose.",
+                        "label": "Database",
+                        "min_size": 1073741824
+                    }
+                },
+                "environment": {
+                    "POSTGRES_PASSWORD": {
+                        "description": "Password for the database",
+                        "label": "DB Password"
+                    }
+                }
+            },
+            "signald": {
+                "image": "finn/signald",
+                "launch_order": 1,
+                "volumes": {
+                    "/signald": {
+                        "description": "Choose a share for signald data exchange. Eg create a Share called signald for this purpose.",
+                        "label": "Signald"
+                    }
+                },
+                "environment": {
+                    "POSTGRES_PASSWORD": {
+                        "description": "Password for the database",
+                        "label": "DB Password"
+                    }
+                }
+            },
+            "mautrix-signal": {
+                "image": "dock.mau.dev/tulir/mautrix-signal",
+                "launch_order": 3,
+                "volumes": {
+                    "/data": {
+                        "description": "Choose a Share for all the bridge data. Eg: create a Share called mautrix-signal for this purpose.",
+                        "label": "Data",
+                        "min_size": 1073741824
+                    },
+                    "/signald": {
+                        "description": "Choose a share for signald data exchange. Eg create a Share called signald for this purpose.",
+                        "label": "Signald"
+                    }
+                },
+                "environment": {
+                    "POSTGRES_PASSWORD": {
+                        "description": "Password for the database",
+                        "label": "DB Password"
+                    }
+                },
+                "ports": {
+                    "29328": {
+                        "description": "Appservice port. Suggested default: 29328",
+                        "host_default": 29328,
+                        "label": "Port",
+                        "protocol": "tcp",
+                        "ui": false
+                    }
+                }
+            }
+        },
+        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-signal/wiki/Bridge-setup-with-Docker\">on the project wiki</a>. Owner of the data share is GID/UID root.</p>"
+    }
+}

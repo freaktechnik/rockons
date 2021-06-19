@@ -28,6 +28,6 @@
                 }
             }
         },
-        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-telegram/wiki/Bridge-setup-with-Docker\">on the project wiki</a>.</p>"
+        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-telegram/wiki/Bridge-setup-with-Docker\">on the project wiki</a>. Owner of the data share is GID/UID 1337.</p>"
     }
 }
