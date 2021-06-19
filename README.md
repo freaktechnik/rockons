@@ -24,3 +24,7 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | vikunja | Uses sqlite, so not well suited for multi-user operation. In order to create an initial account, registration has to be allowed, after that you have to re-create the rockon with registration forbidden if you don't want strangers to be able to sign up | :heavy_check_mark: |
 | webthings-gateway | Port entry in wizzard is just for the UI link in rockstor. The container runs in host network mode, so if you want the container to bind to different ports, use local.json, as described in the container readme. If you want to use lbuetooth or zigbee, you'll have to modify the rockon definition accordingly. | :heavy_check_mark: |
 | mautrix-telegram | Pretty simple to set up, with good documentation. However, requires linking a file to the synapse homeserver's container. | :heavy_check_mark: |
+| mautrix-whatsapp | Pretty simple to set up, with good documentation. However, requires linking a file to the synapse homeserver's container. | :heavy_check_mark: |
+| mautrix-signal | Pretty simple to set up, with good documentation. However, requires linking a file to the synapse homeserver's container. | :heavy_check_mark: |
+| synapse-admin | Simple setup, rock-on candidate, but useless without matrix-synapse rock-on. | :heavy_check_mark: |
+| gotify | Simple to use, [PR against registry](https://github.com/rockstor/rockon-registry/pull/287) | :heavy_check_mark: |
