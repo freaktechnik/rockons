@@ -17,12 +17,6 @@
         "containers": {
             "matrix-synapse": {
                 "image": "matrixdotorg/synapse",
-                "opts": [
-                    [
-                        "--link",
-                        "synapse-postgres:synapse-postgres"
-                    ]
-                ],
                 "launch_order": 2,
                 "ports": {
                     "8008": {

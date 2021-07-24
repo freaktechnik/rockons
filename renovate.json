@@ -1,0 +1,35 @@
+{
+    "renovate": {
+        "description": "Renovate Bot",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://renovatebot.com/",
+        "version": "1.0",
+        "containers": {
+            "renovate": {
+                "image": "renovate/renovate",
+                "launch_order": 1,
+                "opts": [
+                    [
+                        "-e",
+                        "RENOVATE_CONFIG_FILE=/config/config.js"
+                    ]
+                ],
+                "volumes": {
+                    "/config": {
+                        "label": "Config",
+                        "description": "Share containing the config.js file."
+                    }
+                },
+                "environment": {
+                    "GITHUB_COM_TOKEN": {
+                        "label": "GitHub token",
+                        "description": "GitHub token, used to retrieve chaneglogs and such (also required for operation with go packages)"
+                    }
+                }
+            }
+        },
+        "more_info": "<p>Use a config.js file to configure the bot. See https://docs.renovatebot.com/self-hosting/#usage</p>"
+    }
+}
