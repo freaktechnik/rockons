@@ -1,0 +1,143 @@
+{
+    "Drone CI": {
+        "description": "Drone CI optimized for use with Gitea and including a runner",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://crone.io/",
+        "version": "1.0",
+        "container_links": {
+            "drone-runner": [
+                {
+                    "name": "drone",
+                    "source_container": "drone"
+                }
+            ]
+        },
+        "containers": {
+            "drone-runner": {
+                "image": "drone/drone-runner-docker",
+                "tag": "1",
+                "launch_order": 2,
+                "opts": [
+                    [
+                        "-v",
+                        "/var/run/docker.sock:/var/run/docker.sock"
+                    ],
+                    [
+                        "-e",
+                        "DRONE_RPC_HOST=drone:80"
+                    ],
+                    [
+                        "-e",
+                        "DRONE_RPC_PROTO=http"
+                    ],
+                    [
+                        "-e",
+                        "DRONE_RUNNER_NAME=Rockstor"
+                    ]
+                ],
+                "ports": {
+                    "3000": {
+                        "description": "Runner dashboard port",
+                        "host_default": 3000,
+                        "label": "Runner port",
+                        "protocol": "tcp",
+                        "ui": false
+                    }
+                },
+                "environment": {
+                    "DRONE_GITEA_CLIENT_ID": {
+                        "label": "Gitea Client ID",
+                        "description": "Gitea Client ID"
+                    },
+                    "DRONE_GITEA_CLIENT_SECRET": {
+                        "label": "Gitea Client Secret",
+                        "description": "Gitea Client Secret"
+                    },
+                    "DRONE_GITEA_SERVER": {
+                        "label": "Gitea URL",
+                        "description": "URL to the gitea instance, including the protocol"
+                    },
+                    "DRONE_RPC_SECRET": {
+                        "label": "Secret",
+                        "description": "Secret shared between the drone server and runners"
+                    },
+                    "DRONE_SERVER_HOST": {
+                        "label": "Host name",
+                        "description": "Public host name (or IP) of the drone instance"
+                    },
+                    "DRONE_SERVER_PROTO": {
+                        "label": "Protocol",
+                        "description": "Protocol to access the public drone instance (https)"
+                    },
+                    "DRONE_DATABASE_SECRET": {
+                        "label": "Database Secret",
+                        "description": "Secret used to encrypt secrets in the database"
+                    }
+                }
+            },
+            "drone": {
+                "image": "drone/drone",
+                "tag": "2",
+                "launch_order": 1,
+                "opts": [
+                    [
+                        "-e",
+                        "DRONE_HTTP_PROXY_HEADERS=X-Forwarded-For"
+                    ],
+                    [
+                        "-e",
+                        "DRONE_HTTP_SSL_PROXY_HEADERS=X-Forwarded-Scheme:https"
+                    ]
+                ],
+                "volumes": {
+                    "/data": {
+                        "label": "Data",
+                        "description": "Share containing the data for drone. For example create a share named drone-data for this purpose."
+                    }
+                },
+                "ports": {
+                    "80": {
+                        "description": "Drone web UI. Suggested default: 80",
+                        "host_default": 80,
+                        "label": "Web port",
+                        "protocol": "tcp",
+                        "ui": true
+                    }
+                },
+                "environment": {
+                    "DRONE_GITEA_CLIENT_ID": {
+                        "label": "Gitea Client ID",
+                        "description": "Gitea Client ID"
+                    },
+                    "DRONE_GITEA_CLIENT_SECRET": {
+                        "label": "Gitea Client Secret",
+                        "description": "Gitea Client Secret"
+                    },
+                    "DRONE_GITEA_SERVER": {
+                        "label": "Gitea URL",
+                        "description": "URL to the gitea instance, including the protocol"
+                    },
+                    "DRONE_RPC_SECRET": {
+                        "label": "Secret",
+                        "description": "Secret shared between the drone server and workers"
+                    },
+                    "DRONE_SERVER_HOST": {
+                        "label": "Host name",
+                        "description": "Public host name (or IP) of the drone instance"
+                    },
+                    "DRONE_SERVER_PROTO": {
+                        "label": "Protocol",
+                        "description": "Protocol to access the public drone instance (https)"
+                    },
+                    "DRONE_DATABASE_SECRET": {
+                        "label": "Database Secret",
+                        "description": "Secret used to encrypt secrets in the database"
+                    }
+                }
+            }
+        },
+        "more_info": "<p>This is set up for usage with Gitea. Follow the instructions at https://docs.drone.io/server/provider/gitea/ to get all the required configruation values.</p>"
+    }
+}
