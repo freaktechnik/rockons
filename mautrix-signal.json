@@ -4,7 +4,7 @@
         "ui": {
             "slug": ""
         },
-        "website": "https://github.com/tulir/mautrix-signal",
+        "website": "https://github.com/mautrix/signal",
         "version": "1.0",
         "container_links": {
             "mautrix-signal": [
@@ -59,7 +59,7 @@
                 }
             },
             "mautrix-signal": {
-                "image": "dock.mau.dev/tulir/mautrix-signal",
+                "image": "dock.mau.dev/mautrix/signal",
                 "launch_order": 3,
                 "volumes": {
                     "/data": {
@@ -89,6 +89,6 @@
                 }
             }
         },
-        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-signal/wiki/Bridge-setup-with-Docker\">on the project wiki</a>. Owner of the data share is GID/UID root.</p>"
+        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://docs.mau.fi/bridges/python/setup/docker.html\">on the project wiki</a>. Owner of the data share is GID/UID root.</p>"
     }
 }

@@ -4,11 +4,11 @@
         "ui": {
             "slug": ""
         },
-        "website": "https://github.com/tulir/mautrix-whatsapp",
+        "website": "https://github.com/mautrix/whatsapp",
         "version": "1.0",
         "containers": {
             "mautrix-whatsapp": {
-                "image": "dock.mau.dev/tulir/mautrix-whatsapp",
+                "image": "dock.mau.dev/mautrix/whatsapp",
                 "launch_order": 1,
                 "ports": {
                     "29318": {
@@ -28,6 +28,6 @@
                 }
             }
         },
-        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-whatsapp/wiki/Bridge-setup-with-Docker\">on the project wiki</a>. Owner of the data share is GID/UID 1337.</p>"
+        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://docs.mau.fi/bridges/python/setup/docker.html\">on the project wiki</a>. Owner of the data share is GID/UID 1337.</p>"
     }
 }

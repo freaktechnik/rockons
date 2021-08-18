@@ -4,11 +4,11 @@
         "ui": {
             "slug": ""
         },
-        "website": "https://github.com/tulir/mautrix-telegram",
+        "website": "https://github.com/mautrix/telegram",
         "version": "1.0",
         "containers": {
             "mautrix-telegram": {
-                "image": "dock.mau.dev/tulir/mautrix-telegram",
+                "image": "dock.mau.dev/mautrix/telegram",
                 "launch_order": 1,
                 "ports": {
                     "29317": {
@@ -28,6 +28,6 @@
                 }
             }
         },
-        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://github.com/tulir/mautrix-telegram/wiki/Bridge-setup-with-Docker\">on the project wiki</a>. Owner of the data share is GID/UID 1337.</p>"
+        "more_info": "<p>The initial start will create the config, follow along the guide <a href=\"https://docs.mau.fi/bridges/python/setup/docker.html\">on the project wiki</a>. Owner of the data share is GID/UID 1337.</p>"
     }
 }
