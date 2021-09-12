@@ -1,0 +1,50 @@
+{
+    "chrony": {
+        "description": "chrony is a versatile implementation of the Network Time Protocol (NTP). It can synchronise the system clock with NTP servers, reference clocks (e.g. GPS receiver), and manual input using wristwatch and keyboard.",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/cturra/docker-ntp",
+        "version": "1.0",
+        "containers": {
+            "chrony": {
+                "image": "cturra/ntp",
+                "launch_order": 1,
+                "opts": [
+                    [
+                        "--read-only",
+                        ""
+                    ],
+                    [
+                        "--tmpfs",
+                        "/etc/chrony:rw,mode=1750"
+                    ],
+                    [
+                        "--tmpfs",
+                        "/run/chrony:rw,mode=1750"
+                    ],
+                    [
+                        "--tmpfs",
+                        "/var/lib/chrony:rw,mode=1750"
+                    ]
+                ],
+                "environment": {
+                    "NTP_SERVERS": {
+                        "label": "NTP Servers",
+                        "description": "NTP Servers that this should rely on. Separate by commas if there should be fallbacks."
+                    }
+                },
+                "ports": {
+                    "123": {
+                        "description": "Port used by the NTP protocol. Default: 123",
+                        "host_default": 123,
+                        "label": "NTP",
+                        "protocol": "udp",
+                        "ui": false
+                    }
+                }
+            }
+        },
+        "more_info": ""
+    }
+}
