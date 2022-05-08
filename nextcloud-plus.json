@@ -1,0 +1,189 @@
+{
+    "nextcloud-plus": {
+        "description": "Nextcloud, with bells and whistles, inpsired by the all-in-one setup.",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://nextcloud.com/",
+        "version": "1.0",
+        "container_links": {
+        },
+        "containers": {
+            "nextcloud": {
+                "image": "freaktechnik/nextcloud-plus",
+                "launch_order": 6,
+                "ports": {
+                    "7867": {
+                        "description": "Nextcloud push port. Suggested default: 7867",
+                        "host_default": 7867,
+                        "label": "Push port",
+                        "ui": false
+                    },
+                    "9000": {
+                        "description": "Nextcloud fpm port. Suggested default: 9000",
+                        "host_default": 9000,
+                        "label": "FPM port",
+                        "ui": false
+                    }
+                },
+                "volumes": {
+                    "/var/www/html": {
+                        "description": "Choose a Share for all data. Eg: create a Share called data for this purpose.",
+                        "label": "Storage",
+                        "min_size": 1073741824
+                    }
+                },
+                "environment": {
+                    "domain": {
+                        "label": "CODE domain",
+                        "description": "Domain where the CODE instance is running on. Needs to be double escaped for dots because it's a regex field."
+                    },
+                    "POSTGRES_PASSWORD": {
+                        "label": "Database Password",
+                        "description": "Database password for the nextcloud user."
+                    },
+                    "REDIS_HOST": {
+                        "label": "Redis host",
+                        "description": "Hostname where redis is reachable"
+                    },
+                    "REDIS_HOST_PORT": {
+                        "label": "Redis host port",
+                        "description": "Port where redis is available"
+                    },
+                    "REDIS_HOST_PASSWORD": {
+                        "label": "Redis password",
+                        "description": "Password for redis"
+                    }
+                }
+            },
+            "nextcloud-postgres": {
+                "image": "postgres",
+                "tag": "14",
+                "opts": [
+                    [
+                        "-e",
+                        "POSTGRES_USER=nextcloud"
+                    ]
+                ],
+                "launch_order": 1,
+                "volumes": {
+                    "/var/lib/postgresql/data": {
+                        "description": "Choose a Share for the nextcloud database. Eg: create a Share called nextcloud-db for this purpose.",
+                        "label": "Database",
+                        "min_size": 1073741824
+                    }
+                },
+                "ports": {
+                    "5432": {
+                        "description":"PostgreSQL port. Suggested default: 5433 (Rockstor typically uses 5432 already)",
+                        "host_default":5433,
+                        "label":"PostgreSQL port",
+                        "protocol":"tcp"
+                    }
+                },
+                "environment": {
+                    "domain": {
+                        "label": "CODE domain",
+                        "description": "Domain where the CODE instance is running on. Needs to be double escaped for dots because it's a regex field."
+                    },
+                    "POSTGRES_PASSWORD": {
+                        "label": "Database Password",
+                        "description": "Database password for the nextcloud user."
+                    },
+                    "REDIS_HOST": {
+                        "label": "Redis host",
+                        "description": "Hostname where redis is reachable"
+                    },
+                    "REDIS_HOST_PORT": {
+                        "label": "Redis host port",
+                        "description": "Port where redis is available"
+                    },
+                    "REDIS_HOST_PASSWORD": {
+                        "label": "Redis password",
+                        "description": "Password for redis"
+                    }
+                }
+            },
+            "nextcloud-redis": {
+                "image": "redis",
+                "tag": "6.2-bullseye",
+                "launch_order": 2,
+                "environment": {
+                    "domain": {
+                        "label": "CODE domain",
+                        "description": "Domain where the CODE instance is running on. Needs to be double escaped for dots because it's a regex field."
+                    },
+                    "POSTGRES_PASSWORD": {
+                        "label": "Database Password",
+                        "description": "Database password for the nextcloud user."
+                    },
+                    "REDIS_HOST": {
+                        "label": "Redis host",
+                        "description": "Hostname where redis is reachable"
+                    },
+                    "REDIS_HOST_PORT": {
+                        "label": "Redis host port",
+                        "description": "Port where redis is available"
+                    },
+                    "REDIS_HOST_PASSWORD": {
+                        "label": "Redis password",
+                        "description": "Password for redis"
+                    }
+                },
+                "ports": {
+                    "6379": {
+                        "description": "Redis host port. Suggested default: 6379",
+                        "host_default": 6379,
+                        "label": "Redis port",
+                        "ui": false
+                    }
+                },
+                "cmd_arguments": [
+                    ["sh", ""],
+                    ["-c", "exec redis-server --requirepass \"\\$REDIS_HOST_PASSWORD\""]
+                ]
+            },
+            "nextcloud-code": {
+                "image": "collabora/code",
+                "launch_order": 3,
+                "opts": [
+                    [
+                        "--cap-add",
+                        "MKNOD"
+                    ]
+                ],
+                "ports": {
+                    "9980": {
+                        "description": "CODE port",
+                        "label": "CODE",
+                        "host_default": 9980
+                    }
+                },
+                "environment": {
+                    "domain": {
+                        "label": "CODE domain",
+                        "description": "Domain where the CODE instance is running on. Needs to be double escaped for dots because it's a regex field."
+                    },
+                    "POSTGRES_PASSWORD": {
+                        "label": "Database Password",
+                        "description": "Database password for the nextcloud user."
+                    },
+                    "REDIS_HOST": {
+                        "label": "Redis host",
+                        "description": "Hostname where redis is reachable"
+                    },
+                    "REDIS_HOST_PORT": {
+                        "label": "Redis host port",
+                        "description": "Port where redis is available"
+                    },
+                    "REDIS_HOST_PASSWORD": {
+                        "label": "Redis password",
+                        "description": "Password for redis"
+                    }
+                }
+            }
+        },
+        "more_info": "",
+        "volume_add_support": true
+    }
+}

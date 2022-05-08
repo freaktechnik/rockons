@@ -4,7 +4,7 @@
         "ui": {
             "slug": ""
         },
-        "website": "https://crone.io/",
+        "website": "https://drone.io/",
         "version": "1.0",
         "container_links": {
             "drone-runner": [

@@ -36,8 +36,13 @@
                         "label": "Timezone",
                         "description": "List of available values at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List"
                     }
+                },
+                "devices": {
+                    "/dev/ttyACM0": {
+                        "description": "Zigbee stick serial port. Usually /dev/ttyACM0",
+                        "label": "Zigbee"
+                    }
                 }
-                //TODO pass through device?
             }
         }
     }

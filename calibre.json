@@ -1,0 +1,55 @@
+{
+    "Calibre Linuxserver.io": {
+        "version": "1.0",
+        "description": "Calibre is a powerful and easy to use e-book manager.",
+        "more_info": "",
+        "website": "https://calibre-ebook.com/",
+        "icon": "",
+        "ui": {
+            "slug": ""
+        },
+        "containers": {
+            "calibre-linuxserver": {
+                "image": "lscr.io/linuxserver/calibre",
+                "launch_order": 1,
+                "environment": {
+                    "PUID": {
+                        "description": "Enter a valid system UserID for Calibre. Must have full permissions on the share.",
+                        "label": "PUID",
+                        "index": 1
+                    },
+                    "PGID": {
+                        "description": "Enter a valid system GroupID for Calibre. This group or the above UserID must have full permissions for the share.",
+                        "label": "PGID",
+                        "index": 2
+                    },
+                    "TZ": {
+                        "description": "Enter a timezone name for Calibre. Example: Europe/London",
+                        "label": "Timezone",
+                        "index": 3
+                    }
+                },
+                "volumes": {
+                    "/config": {
+                        "description": "Choose a share for Calibre to use. Eg: create a share called calibre for this purpose alone.",
+                        "label": "Config"
+                    }
+                },
+                "ports": {
+                    "8080": {
+                        "description": "Calibre application UI port. Suggested default: 8080",
+                        "host_default": 8080,
+                        "label": "Calibre app",
+                        "ui": true
+                    },
+                    "8081": {
+                        "description": "Calibre web server port. Has to be enabled in the application. Suggested default: 8081",
+                        "host_default": 8081,
+                        "label": "Calibre server",
+                        "ui": true
+                    }
+                }
+            }
+        }
+    }
+}

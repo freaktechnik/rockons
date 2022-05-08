@@ -17,6 +17,7 @@
         "containers": {
             "mautrix-signal-db": {
                 "image": "postgres",
+                "tag": "14",
                 "launch_order": 2,
                 "opts": [
                     [
@@ -43,7 +44,7 @@
                 }
             },
             "signald": {
-                "image": "finn/signald",
+                "image": "signald/signald",
                 "launch_order": 1,
                 "volumes": {
                     "/signald": {

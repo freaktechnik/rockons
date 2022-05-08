@@ -1,0 +1,46 @@
+{
+    "UnifiedPush common proxies": {
+        "description": "Rewrite Proxy for UnifiedPush written in Go",
+        "website": "https://github.com/UnifiedPush/common-proxies",
+        "version": "1.0",
+        "containers": {
+            "up-common-proxy": {
+                "image": "unifiedpush/common-proxies",
+                "launch_order": 1,
+                "opts": [
+                    [
+                        "-e",
+                        "UP_REWRITE_GOTIFY_ENABLE=true"
+                    ],
+                    [
+                        "-e",
+                        "UP_REWRITE_GOTIFY_SCHEME=http"
+                    ],
+                    [
+                        "-e",
+                        "UP_GATEWAY_MATRIX_ENABLE=true"
+                    ]
+                ],
+                "ports": {
+                    "5000": {
+                        "description": "Proxy port. Suggested default: 5135",
+                        "host_default": 5135,
+                        "label": "Proxy port",
+                        "protocol": "tcp"
+                    }
+                },
+                "environment": {
+                    "UP_REWRITE_GOTIFY_ADDRESS": {
+                        "label": "Gotify address",
+                        "description": "Example: gotify:80"
+                    },
+                    "UP_GATEWAY_ALLOWEDHOSTS": {
+                        "label": "Allowed gateway hosts",
+                        "description": "Allow the gateway to redirect to these internal hosts (comma separated)"
+                    }
+                }
+            }
+        },
+        "more_info": ""
+    }
+}
