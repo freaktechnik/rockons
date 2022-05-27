@@ -1,0 +1,58 @@
+{
+    "synatainer": {
+        "description": "Synapse Maintenance Container",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://gitlab.com/mb-saces/synatainer",
+        "version": "1.0",
+        "containers": {
+            "synatainer": {
+                "image": "registry.gitlab.com/mb-saces/synatainer",
+                "launch_order": 1,
+                "environment": {
+                    "DB_HOST": {
+                        "label": "Postgres Host Name",
+                        "description": "Host name of the postgres database server."
+                    },
+                    "DB_NAME": {
+                        "label": "Postgres DB",
+                        "description": "Name of the Postgres database."
+                    },
+                    "DB_USER": {
+                        "label": "Postgres User",
+                        "description": "Username for the Postgres database."
+                    },
+                    "PGPASSWORD": {
+                        "label": "Postgres Password",
+                        "description": "Password for the Postgres user."
+                    },
+                    "BEARER_TOKEN": {
+                        "label": "Access Token",
+                        "description": "Matrix Access Token with Admin Privileges"
+                    },
+                    "SYNAPSE_HOST": {
+                        "label": "Synapse Host Name",
+                        "description": "Synapse Admin API host. Default: http://127.0.0.1:8008"
+                    },
+                    "MEDIA_MAX_AGE": {
+                        "label": "Max age for media",
+                        "description": "Maximum age for media in days. Set to 'none' to disable the feature. Default: 90"
+                    },
+                    "HISTORY_MAX_AGE": {
+                        "label": "Max age for history",
+                        "description": "Maximum age for room history in days. Default: 180"
+                    },
+                    "HISTORY_ROOM_LIST": {
+                        "label": "Rooms to purge history",
+                        "description": "List of rooms to purge history from. SEt to 'none' to disable the feature. Default: 'all'"
+                    },
+                    "ROOM_KEEP_LIST": {
+                        "label": "Rooms to preserve",
+                        "description": "Rooms that should never be fully purged. Set to 'all' to disable the feature."
+                    }
+                }
+            }
+        }
+    }
+}

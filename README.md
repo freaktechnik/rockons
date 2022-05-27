@@ -35,3 +35,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | nextcloud-plus | Built to migrate from an existing nextcloud official + postgres setup to this. | :heavy_check_mark: |
 | up-common-proxies | Simple to set up. | :heavy_check_mark: |
 | calibre | | :heavy_check_mark: |
+| synatainer | SImple to configure via env vars. | :heavy_check_mark: |
