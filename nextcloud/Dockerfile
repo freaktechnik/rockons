@@ -97,6 +97,8 @@ COPY supervisord.conf /
 RUN chmod +r /supervisord.conf && \
     chmod +x /cron.sh
 
+ENV NEXTCLOUD_UPDATE=1
+
 # Custom (from nextcloud AIO)
 RUN set -ex; \
     \
