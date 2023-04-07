@@ -3,7 +3,7 @@ name: Publish new nextcloud-plus image
 on:
   push:
     paths:
-    - nextcloud
+    - 'nextcloud/**'
     branches:
     - main
 
