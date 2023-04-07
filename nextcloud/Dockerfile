@@ -40,12 +40,14 @@ RUN set -ex; \
         libc-client-dev \
         libkrb5-dev \
         libsmbclient-dev \
+        libpq-dev \
     ; \
     \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
     docker-php-ext-install \
         bz2 \
         imap \
+        pgsql \
     ; \
     pecl install smbclient; \
     docker-php-ext-enable smbclient; \
@@ -111,15 +113,16 @@ RUN set -ex; \
         git \
         postgresql-client \
         gnupg \
+        tzdata \
     ; \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -ex; \
     grep -q '^pm = dynamic' /usr/local/etc/php-fpm.d/www.conf; \
     sed -i 's/^pm.max_children =.*/pm.max_children = 100/' /usr/local/etc/php-fpm.d/www.conf; \
-    sed -i 's/^pm.start_servers =.*/pm.start_servers = 25/' /usr/local/etc/php-fpm.d/www.conf; \
-    sed -i 's/^pm.min_spare_servers =.*/pm.min_spare_servers = 25/' /usr/local/etc/php-fpm.d/www.conf; \
-    sed -i 's/^pm.max_spare_servers =.*/pm.max_spare_servers = 75/' /usr/local/etc/php-fpm.d/www.conf
+    sed -i 's/^pm.start_servers =.*/pm.start_servers = 2/' /usr/local/etc/php-fpm.d/www.conf; \
+    sed -i 's/^pm.min_spare_servers =.*/pm.min_spare_servers = 1/' /usr/local/etc/php-fpm.d/www.conf; \
+    sed -i 's/^pm.max_spare_servers =.*/pm.max_spare_servers = 3/' /usr/local/etc/php-fpm.d/www.conf
 
 COPY redis-session.ini /usr/local/etc/php/conf.d
 RUN chmod +r /usr/local/etc/php/conf.d/redis-session.ini
