@@ -4,6 +4,7 @@ on:
   push:
     paths:
     - 'nextcloud/**'
+    - '.github/workflows/nextcloud-plus.yml'
     branches:
     - main
 
