@@ -25,6 +25,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          context: '{{currentContext}}:nextcloud'
           file: nextcloud/Dockerfile
           push: true
           tags: freaktechnik/nextcloud-plus:latest
