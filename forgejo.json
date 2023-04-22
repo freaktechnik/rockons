@@ -9,7 +9,7 @@
         "containers": {
             "forgejo": {
                 "image": "codeberg.org/forgejo/forgejo",
-                "tag": "1.18",
+                "tag": "1.19",
                 "launch_order": 1,
                 "opts": [
                     [
