@@ -33,17 +33,9 @@
                         "label": "secret",
                         "description": "Set a secret"
                     },
-                    "SYMFONY__ENV__MAILER_HOST": {
-                        "label": "Mail host",
-                        "description": "defaults to 127.0.0.1, the SMTP host"
-                    },
-                    "SYMFONY__ENV__MAILER_USER": {
-                        "label": "Mail user",
-                        "description": "defaults to ~, the SMTP user"
-                    },
-                    "SYMFONY__ENV__MAILER_PASSWORD": {
-                        "label": "Mail password",
-                        "description": "defaults to ~, the SMTP password"
+                    "SYMFONY__ENV__MAILER_DSN": {
+                        "label": "Mailer DSN",
+                        "description": "DSN for sending emails. Example: smtp://user:pass@smtp.example.com:port"
                     },
                     "SYMFONY__ENV__FROM_EMAIL": {
                         "label": "Mail sender",
