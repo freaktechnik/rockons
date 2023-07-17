@@ -74,6 +74,10 @@
                     "DRONE_DATABASE_SECRET": {
                         "label": "Database Secret",
                         "description": "Secret used to encrypt secrets in the database"
+                    },
+                    "DRONE_USER_CREATE": {
+                        "label": "Create users",
+                        "description": "Users the instance should create. Useful to create an admin account. Example: username:octocat,admin:true"
                     }
                 }
             },
@@ -134,6 +138,10 @@
                     "DRONE_DATABASE_SECRET": {
                         "label": "Database Secret",
                         "description": "Secret used to encrypt secrets in the database"
+                    },
+                    "DRONE_USER_CREATE": {
+                        "label": "Create users",
+                        "description": "Users the instance should create. Useful to create an admin account. Example: username:octocat,admin:true"
                     }
                 }
             }
