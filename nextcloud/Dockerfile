@@ -126,13 +126,17 @@ RUN set -ex; \
     sed -i 's/^pm.min_spare_servers =.*/pm.min_spare_servers = 1/' /usr/local/etc/php-fpm.d/www.conf; \
     sed -i 's/^pm.max_spare_servers =.*/pm.max_spare_servers = 3/' /usr/local/etc/php-fpm.d/www.conf
 
-COPY redis-session.ini /usr/local/etc/php/conf.d
-RUN chmod +rw /usr/local/etc/php/conf.d/redis-session.ini
+# COPY redis-session.ini /usr/local/etc/php/conf.d
+# RUN chmod +rw /usr/local/etc/php/conf.d/redis-session.ini
 
 RUN chown www-data:root -R /var/log/supervisord/ && \
     chown www-data:root -R /var/run/supervisord/ && \
     mkdir -p /var/log/nextcloud/ && \
-    chown -R www-data:root /var/log/nextcloud/
+    chown -R www-data:root /var/log/nextcloud/ && \
+    chown www-data:root -R /usr/src && \
+    chown www-data:root -R /usr/local/etc/php/conf.d && \
+    chown www-data:root -R /usr/local/etc/php-fpm.d && \
+    chmod -R 777 /tmp;
 
 # Give root a random password
 RUN echo "root:$(openssl rand -base64 12)" | chpasswd
