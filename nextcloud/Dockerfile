@@ -105,7 +105,7 @@ RUN set -ex; \
     \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        netcat \
+        netcat-openbsd \
         openssl \
         gnupg \
         dirmngr \
@@ -113,6 +113,9 @@ RUN set -ex; \
         postgresql-client \
         gnupg \
         tzdata \
+        grep \
+        nodejs \
+        coreutils \
     ; \
     rm -rf /var/lib/apt/lists/*
 
