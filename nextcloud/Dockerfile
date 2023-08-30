@@ -126,8 +126,8 @@ RUN set -ex; \
     sed -i 's/^pm.min_spare_servers =.*/pm.min_spare_servers = 1/' /usr/local/etc/php-fpm.d/www.conf; \
     sed -i 's/^pm.max_spare_servers =.*/pm.max_spare_servers = 3/' /usr/local/etc/php-fpm.d/www.conf
 
-#COPY redis-session.ini /usr/local/etc/php/conf.d
-#RUN chmod +r /usr/local/etc/php/conf.d/redis-session.ini
+COPY redis-session.ini /usr/local/etc/php/conf.d
+RUN chmod +r /usr/local/etc/php/conf.d/redis-session.ini
 
 RUN chown www-data:root -R /var/log/supervisord/ && \
     chown www-data:root -R /var/run/supervisord/ && \
