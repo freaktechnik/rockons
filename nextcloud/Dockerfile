@@ -127,14 +127,14 @@ RUN set -ex; \
     sed -i 's/^pm.max_spare_servers =.*/pm.max_spare_servers = 3/' /usr/local/etc/php-fpm.d/www.conf
 
 RUN touch /usr/local/etc/php/conf.d/redis-session.ini && \
-    chown www-data:root /usr/local/etc/php/conf.d/redis-session.ini;
+    chown www-data:www-data /usr/local/etc/php/conf.d/redis-session.ini;
 
 RUN chown www-data:root -R /var/log/supervisord/ && \
     chown www-data:root -R /var/run/supervisord/ && \
     mkdir -p /var/log/nextcloud/ && \
     chown -R www-data:root /var/log/nextcloud/ && \
     chown www-data:root -R /usr/src && \
-    chown www-data:root -R /usr/local/etc/php/conf.d && \
+    chown www-data:www-data -R /usr/local/etc/php/conf.d && \
     chown www-data:root -R /usr/local/etc/php-fpm.d && \
     chmod -R 777 /tmp;
 
