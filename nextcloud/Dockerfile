@@ -83,8 +83,7 @@ RUN set -ex; \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -ex; \
-    python3 -m pip install --upgrade pip; \
-    python3 -m pip install hexhamming;
+    python3 -m pip install --break-system-packages hexhamming;
 
 # Back to the regularly scheduled fpm enhancements, particularly supervisord
 
