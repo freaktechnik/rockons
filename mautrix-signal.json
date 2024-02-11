@@ -43,22 +43,6 @@
                     }
                 }
             },
-            "signald": {
-                "image": "signald/signald",
-                "launch_order": 1,
-                "volumes": {
-                    "/signald": {
-                        "description": "Choose a share for signald data exchange. Eg create a Share called signald for this purpose.",
-                        "label": "Signald"
-                    }
-                },
-                "environment": {
-                    "POSTGRES_PASSWORD": {
-                        "description": "Password for the database",
-                        "label": "DB Password"
-                    }
-                }
-            },
             "mautrix-signal": {
                 "image": "dock.mau.dev/mautrix/signal",
                 "launch_order": 3,
@@ -67,10 +51,6 @@
                         "description": "Choose a Share for all the bridge data. Eg: create a Share called mautrix-signal for this purpose.",
                         "label": "Data",
                         "min_size": 1073741824
-                    },
-                    "/signald": {
-                        "description": "Choose a share for signald data exchange. Eg create a Share called signald for this purpose.",
-                        "label": "Signald"
                     }
                 },
                 "environment": {
