@@ -7,8 +7,8 @@
         "website": "https://vikunja.io/",
         "version": "1.0",
         "containers": {
-            "vikunja-api": {
-                "image": "vikunja/api",
+            "vikunja": {
+                "image": "vikunja/vikunja",
                 "launch_order": 1,
                 "opts": [
                     [
@@ -18,9 +18,10 @@
                 ],
                 "ports": {
                     "3456": {
-                        "description": "Vikunja backend port. Expose under /api/ of the frontend. Default: 3456",
+                        "description": "Vikunja port. Default: 3456",
                         "host_default": 3456,
-                        "label": "Backend"
+                        "label": "Web",
+                        "ui": true
                     }
                 },
                 "volumes": {
@@ -38,73 +39,11 @@
                 "environment": {
                     "VIKUNJA_SERVICE_ENABLEREGISTRATION": {
                         "label": "Enable registration",
-                        "description": "True to allow registration, false to not allowe it"
+                        "description": "True to allow registration, false to not allow it"
                     },
-                    "VIKUNJA_SERVICE_FRONTENDURL": {
-                        "label": "URL of the fronted",
-                        "description": "Full URL (including protocol) to the frontend"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_ENABLE": {
-                        "label": "Enable todoist migration",
-                        "description": "True to enable todoist migration"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_CLIENTID": {
-                        "label": "Todoist client ID",
-                        "description": "Client ID for todoist to use for migration"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_CLIENTSECRET": {
-                        "label": "Todoist client secret",
-                        "description": "Client secret for to todoist to use for migration"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_REDIRECTURL": {
-                        "label": "Todoist redirect URL",
-                        "description": "Redirect URL configured in the todoist app"
-                    },
-                    "PUID": {
-                        "label": "User ID",
-                        "description": "Vikunja volume owner user ID"
-                    },
-                    "GUID": {
-                        "label": "Group ID",
-                        "description": "Vikunja volume owner group ID"
-                    }
-                }
-            },
-            "vikunja-frontend": {
-                "image": "vikunja/frontend",
-                "launch_order": 2,
-                "ports": {
-                    "80": {
-                        "description": "Vikunja frontend port. Defaults to 80",
-                        "label": "Frontend",
-                        "host_default": 80,
-                        "ui": true
-                    }
-                },
-                "environment": {
-                    "VIKUNJA_SERVICE_ENABLEREGISTRATION": {
-                        "label": "Enable registration",
-                        "description": "True to allow registration, false to not allowe it"
-                    },
-                    "VIKUNJA_SERVICE_FRONTENDURL": {
-                        "label": "URL of the fronted",
-                        "description": "Full URL (including protocol) to the frontend"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_ENABLE": {
-                        "label": "Enable todoist migration",
-                        "description": "True to enable todoist migration"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_CLIENTID": {
-                        "label": "Todoist client ID",
-                        "description": "Client ID for todoist to use for migration"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_CLIENTSECRET": {
-                        "label": "Todoist client secret",
-                        "description": "Client secret for to todoist to use for migration"
-                    },
-                    "VIKUNJA_MIGRATION_TODOIST_REDIRECTURL": {
-                        "label": "Todoist redirect URL",
-                        "description": "Redirect URL configured in the todoist app"
+                    "VIKUNJA_SERVICE_PUBLICURL": {
+                        "label": "URL where vikunja is reachable",
+                        "description": "Full URL (including protocol) to open vikunja"
                     },
                     "PUID": {
                         "label": "User ID",
