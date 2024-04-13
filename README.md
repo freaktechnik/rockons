@@ -38,3 +38,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | calibre | | :heavy_check_mark: |
 | synatainer | SImple to configure via env vars. | :heavy_check_mark: |
 | bonob | Config via env vars, customized to what my setup needs. | :heavy_check_mark: |
+| ntfy | Configuration via config file recommended. | :heavy_check_mark: |

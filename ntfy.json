@@ -1,0 +1,47 @@
+{
+    "ntfy": {
+        "description": "Send push notifications to your phone or desktop via PUT/POST",
+        "ui": {
+            "slug": "app"
+        },
+        "website": "https://ntfy.sh/",
+        "version": "1.0",
+        "containers": {
+            "ntfy": {
+                "image": "binwiederhier/ntfy",
+                "cmd_arguments": [
+                    ["serve", ""]
+                ],
+                "launch_order": 1,
+                "ports": {
+                    "80": {
+                        "description": "ntfy server port. Suggested default: 80",
+                        "host_default": 80,
+                        "label": "Server port",
+                        "protocol": "tcp",
+                        "ui": true
+                    }
+                },
+                "volumes": {
+                    "/var/cache/ntfy": {
+                        "description": "Choose a Share for the message cache. Eg: create a Share called ntfy-cache for this purpose.",
+                        "label": "Message Cache",
+                        "min_size": 1073741824
+                    },
+                    "/etc/ntfy": {
+                        "description": "Choose a Share for the ntfy configuration. Eg: create a Share called ntfy for this purpose.",
+                        "label": "Configuration",
+                        "min_size": 1073741824
+                    }
+                },
+                "environment": {
+                    "TZ": {
+                        "label": "Timezone",
+                        "description": "Example: Europe/Berlin"
+                    }
+                }
+            }
+        },
+        "more_info": "<p>By default there is no access control. Consult <a href=\"https://ntfy.sh/docs/config/#access-control\">the ntfy documentation</a> to set up access control.</p>"
+    }
+}
