@@ -1,0 +1,62 @@
+{
+    "bonob": {
+        "description": "A sonos SMAPI implementation to allow registering sources of music with sonos.",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://github.com/simojenki/bonob",
+        "version": "1.0",
+        "containers": {
+            "bonob": {
+                "image": "simojenki/bonob",
+                "launch_order": 1,
+                "opts": [
+                    [
+                        "--network",
+                        "host"
+                    ],
+                    [
+                        "-e",
+                        "BNB_SONOS_AUTO_REGISTER=true"
+                    ],
+                    [
+                        "-e",
+                        "BNB_SONOS_DEVICE_DISCOVERY=true"
+                    ],
+                    [
+                        "-e",
+                        "BNB_SECRET=rockstor_bonob"
+                    ]
+                ],
+                "ports": {
+                    "4534": {
+                        "description": "Bonob service port. Default: 4534",
+                        "host_default": 4534,
+                        "label": "Server port",
+                        "protocol": "tcp",
+                        "ui": false
+                    }
+                },
+                "environment": {
+                    "TZ": {
+                        "label": "Timezone",
+                        "description": "Example: Europe/Berlin"
+                    },
+                    "BNB_SUBSONIC_URL": {
+                        "label": "Subsonic URL",
+                        "description": "URL to the subsonic-compatible service. Example: https://my-navidrome-service.com:4533"
+                    },
+                    "BNB_URL": {
+                        "label": "Public URL",
+                        "description": "URL where bonob is accessible at for the sonos devices. Default: http://{hostname}:4534"
+                    },
+                    "BNB_SONOS_SEED_HOST": {
+                        "label": "Seed host",
+                        "description": "Known IP of a sonos player in the network."
+                    }
+                }
+            }
+        },
+        "more_info": "Your music service shoudl show up in your Sonos app"
+    }
+}

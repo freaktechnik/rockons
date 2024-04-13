@@ -37,3 +37,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | up-common-proxies | Simple to set up. | :heavy_check_mark: |
 | calibre | | :heavy_check_mark: |
 | synatainer | SImple to configure via env vars. | :heavy_check_mark: |
+| bonob | Config via env vars, customized to what my setup needs. | :heavy_check_mark: |
