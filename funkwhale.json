@@ -5,22 +5,360 @@
             "slug": ""
         },
         "website": "https://funkwhale.audio/",
-        "version": "0.21",
+        "version": "1.4",
         "containers": {
-            "funkwhale": {
-                "image": "funkwhale/all-in-one",
-                "tag": "stable",
+            "funkwhale-db": {
+                "image": "postgres",
+                "tag": "15-alpine",
+                "launch_order": 1,
                 "opts": [
                     [
                         "-e",
-                        "FUNKWHALE_API_IP=127.0.0.1"
+                        "POSTGRES_HOST_AUTH_METHOD=trust"
                     ],
                     [
                         "-e",
-                        "NESTED_PROXY=1"
+                        "POSTGRES_USER=funkwhale"
                     ]
                 ],
-                "launch_order": 1,
+                "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "volumes": {
+                    "/var/lib/postgresql/data": {
+                        "description": "Chose a Share for the funkwhale database. Eg: create a Share called funkwhale-db for this purpose.",
+                        "label": "Database",
+                        "min_size": 1073741824
+                    }
+                }
+            },
+            "funkwhale-redis": {
+                "image": "redis",
+                "tag": "7-alpine",
+                "launch_order": 2,
+                "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "volumes": {
+                    "/data": {
+                        "description": "Chose a Share for the funkwhale redis configuration. Eg: create a Share called funkwhale-redis for this purpose.",
+                        "label": "Redis",
+                        "min_size": 1073741824
+                    }
+                }
+            },
+            "funkwhale-typesense": {
+                "image": "typesense/typesense",
+                "tag": "0.24.0",
+                "launch_order": 3,
+                "opts": [
+                    [
+                        "-e",
+                        "TYPESENSE_DATA_DIR=/tsdata"
+                    ],
+                    [
+                        "-e",
+                        "TYPESENSE_ENABLE_CORS=1"
+                    ]
+                ],
+                "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "volumes": {
+                    "/tsdata": {
+                        "description": "create a Share for the funkwhale typesense data. Eg: create a Share called funkwhale-typesense for this purpose.",
+                        "label": "Typesense Data",
+                        "min_size": 1073741824
+                    }
+                }
+            },
+            "funkwhale-celeryworker": {
+                "image": "funkwhale/api",
+                "tag": "stable",
+                "cmd_arguments": [
+                    [
+                        "celery",
+                        "-app=funkwhale_api.taskapp worker"
+                    ]
+                ],
+                "opts": [
+                    [
+                        "-e",
+                        "DJANGO_SETTINGS_MODULE=config.settings.production"
+                    ],
+                    [
+                        "-e",
+                        "C_FORCE_ROOT=true"
+                    ],
+                    [
+                        "-e",
+                        "MEDIA_ROOT=/srv/funkwhale/data/media"
+                    ],
+                    [
+                        "-e",
+                        "DATABASE_URL=postgres://funkwhale:@funkwhale-db:5432/funkwhale"
+                    ],
+                    [
+                        "-e",
+                        "CACHE_URL=redis://funkwhale-redis:6379/0"
+                    ],
+                    [
+                        "-e",
+                        "TYPESENSE_HOST=funkwhale-typesense"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-db:funkwhale-db"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-redis:funkwhale-redis"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-typesense:funkwhale-typesense"
+                    ]
+                ],
+                "launch_order": 6,
+                "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "volumes": {
+                    "/srv/funkwhale/data/media": {
+                        "description": "Chose a share containing the funkwhale music data. Eg: Create a share called funkwhale-media for this.",
+                        "label": "Celery Worker Music",
+                        "min_size": 1073741824
+                    }
+                }
+            },
+            "funkwhale-celerybeat": {
+                "image": "funkwhale/api",
+                "tag": "stable",
+                "cmd_arguments": [
+                    [
+                        "celery",
+                        "-app=funkwhale_api.taskapp beat"
+                    ]
+                ],
+                "opts": [
+                    [
+                        "-e",
+                        "DJANGO_SETTINGS_MODULE=config.settings.production"
+                    ],
+                    [
+                        "-e",
+                        "DATABASE_URL=postgres://funkwhale:@funkwhale-db:5432/funkwhale"
+                    ],
+                    [
+                        "-e",
+                        "CACHE_URL=redis://funkwhale-redis:6379/0"
+                    ],
+                    [
+                        "-e",
+                        "TYPESENSE_HOST=funkwhale-typesense"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-db:funkwhale-db"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-redis:funkwhale-redis"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-typesense:funkwhale-typesense"
+                    ]
+                ],
+                "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "launch_order": 5
+            },
+            "funkwhale-api": {
+                "image": "funkwhale/api",
+                "tag": "stable",
+                "launch_order": 4,
+                "opts": [
+                    [
+                        "-e",
+                        "DJANGO_SETTINGS_MODULE=config.settings.production"
+                    ],
+                    [
+                        "-e",
+                        "MEDIA_ROOT=/srv/funkwhale/data/media"
+                    ],
+                    [
+                        "-e",
+                        "STATIC_ROOT=/usr/share/nginx/html/staticfiles"
+                    ],
+                    [
+                        "-e",
+                        "DATABASE_URL=postgres://funkwhale:@funkwhale-db:5432/funkwhale"
+                    ],
+                    [
+                        "-e",
+                        "CACHE_URL=redis://funkwhale-redis:6379/0"
+                    ],
+                    [
+                        "-e",
+                        "TYPESENSE_HOST=funkwhale-typesense"
+                    ],
+                    [
+                        "-e",
+                        "MUSIC_DIRECTORY_PATH=/srv/funkwhale/data/music"
+                    ],
+                    [
+                        "-e",
+                        "MUSIC_DIRECTORY_SERVE_PATH=/srv/funkwhale/data/music"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-db:funkwhale-db"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-redis:funkwhale-redis"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-typesense:funkwhale-typesense"
+                    ]
+                ],
+                "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
+                    "FUNKWHALE_HOSTNAME": {
+                        "label": "Domain",
+                        "description": "Domain the instance is available under."
+                    },
+                    "FUNKWHALE_PROTOCOL": {
+                        "label": "Protocol",
+                        "description": "Protocol the instance should be advertised with. Can be http, https"
+                    },
+                    "DJANGO_SECRET_KEY": {
+                        "label": "Django secret key",
+                        "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
+                    },
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "volumes": {
+                    "/srv/funkwhale/data/media": {
+                        "description": "Chose a share containing the funkwhale music data. Eg: Create a share called funkwhale-media for this.",
+                        "label": "API Worker Music",
+                        "min_size": 1073741824
+                    },
+                    "/usr/share/nginx/html/staticfiles": {
+                        "description": "Chose a share containing the funkwhale static data. Eg: Create a share called funkwhale-static for this.",
+                        "label": "API Worker Static",
+                        "min_size": 1073741824
+                    }
+                }
+            },
+            "funkwhale-front": {
+                "image": "funkwhale/front",
+                "tag": "stable",
+                "launch_order": 7,
                 "ports": {
                     "80": {
                         "description": "Funkwhale port for the API and web interface. Suggested default: 5000",
@@ -30,14 +368,57 @@
                         "ui": true
                     }
                 },
-                "volumes": {
-                    "/data": {
-                        "description": "Choose a Share for all funkwhale data. Eg: create a Share called funkwhale for this purpose.",
-                        "label": "Data",
-                        "min_size": 1073741824
-                    }
-                },
+                "opts": [
+                    [
+                        "-e",
+                        "DJANGO_SETTINGS_MODULE=config.settings.production"
+                    ],
+                    [
+                        "-e",
+                        "MEDIA_ROOT=/srv/funkwhale/data/media"
+                    ],
+                    [
+                        "-e",
+                        "DATABASE_URL=postgres://funkwhale:@funkwhale-db:5432/funkwhale"
+                    ],
+                    [
+                        "-e",
+                        "CACHE_URL=redis://funkwhale-redis:6379/0"
+                    ],
+                    [
+                        "-e",
+                        "TYPESENSE_HOST=funkwhale-typesense"
+                    ],
+                    [
+                        "-e",
+                        "MUSIC_DIRECTORY_PATH=/srv/funkwhale/data/music"
+                    ],
+                    [
+                        "-e",
+                        "MUSIC_DIRECTORY_SERVE_PATH=/srv/funkwhale/data/music"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-db:funkwhale-db"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-redis:funkwhale-redis"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-typesense:funkwhale-typesense"
+                    ],
+                    [
+                        "--link",
+                        "funkwhale-api:api"
+                    ]
+                ],
                 "environment": {
+                    "NGINX_MAX_BODY_SIZE": {
+                        "label": "Maximum upload size",
+                        "description": "Limits the file upload size. Recommended: 100M"
+                    },
                     "FUNKWHALE_HOSTNAME": {
                         "label": "Domain",
                         "description": "Domain the instance is available under."
@@ -46,33 +427,29 @@
                         "label": "Protocol",
                         "description": "Protocol the instance should be advertised with. Can be http, https"
                     },
-                    "NGINX_MAX_BODY_SIZE": {
-                        "label": "Maximum upload size",
-                        "description": "Limits the file upload size. Recommended: 100M"
-                    },
-                    "FUNKWHALE_API_PORT": {
-                        "label": "Exposed port",
-                        "description": "Port that the instance is exposed on to the network."
-                    },
                     "DJANGO_SECRET_KEY": {
                         "label": "Django secret key",
                         "description": "Generate a secure secret key for the instance. Recommended generation method: openssl rand -hex 45"
                     },
-                    "PUID": {
-                        "label": "User",
-                        "description": "User that owns the funkwhale volume"
+                    "TYPESENSE_API_KEY": {
+                        "label": "Typesense API key",
+                        "description": "Generate a random key to use as API key. Recommended generation method: openssl rand -base64 45"
+                    }
+                },
+                "volumes": {
+                    "/srv/funkwhale/data/media": {
+                        "description": "Chose a share containing the funkwhale music data. Eg: Create a share called funkwhale-media for this.",
+                        "label": "Front-End Music",
+                        "min_size": 1073741824
                     },
-                    "GUID": {
-                        "label": "Group",
-                        "description": "Group the user owning the funkwhale volume is in. Official documentation suggests that this is the docker group."
-                    },
-                    "MEDIA_URL": {
-                        "label": "Media URL",
-                        "description": "Exposed URL for media. Should end with /media/."
+                    "/usr/share/nginx/html/staticfiles": {
+                        "description": "Chose a share containing the funkwhale static data. Eg: Create a share called funkwhale-static for this.",
+                        "label": "Front-End Static",
+                        "min_size": 1073741824
                     }
                 }
             }
         },
-        "more_info": "<p>Create an admin user using <code>docker exec -it funkwhale manage createsuperuser</code></p>"
+        "more_info": "<p>Create an admin user using <code>docker exec -it funkwhale-api funkwhale-manage createsuperuser</code></p>"
     }
 }
