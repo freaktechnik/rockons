@@ -135,7 +135,11 @@
                 "cmd_arguments": [
                     [
                         "celery",
-                        "-app=funkwhale_api.taskapp worker"
+                        ""
+                    ],
+                    [
+                        "--app=funkwhale_api.taskapp",
+                        "worker"
                     ]
                 ],
                 "opts": [
@@ -213,7 +217,11 @@
                 "cmd_arguments": [
                     [
                         "celery",
-                        "-app=funkwhale_api.taskapp beat"
+                        "",
+                    ],
+                    [
+                        "--app=funkwhale_api.taskapp",
+                        "beat"
                     ]
                 ],
                 "opts": [
@@ -318,6 +326,10 @@
                     [
                         "--link",
                         "funkwhale-typesense:funkwhale-typesense"
+                    ],
+                    [
+                        "--mount",
+                        "type=tmpfs,destination=/srv/funkwhale/data/music"
                     ]
                 ],
                 "environment": {
@@ -412,6 +424,10 @@
                     [
                         "--link",
                         "funkwhale-api:api"
+                    ],
+                    [
+                        "--mount",
+                        "type=tmpfs,destination=/srv/funkwhale/data/music"
                     ]
                 ],
                 "environment": {
