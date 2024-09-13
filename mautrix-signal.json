@@ -18,7 +18,7 @@
             "mautrix-signal-db": {
                 "image": "postgres",
                 "tag": "14",
-                "launch_order": 2,
+                "launch_order": 1,
                 "opts": [
                     [
                         "-e",
@@ -45,7 +45,7 @@
             },
             "mautrix-signal": {
                 "image": "dock.mau.dev/mautrix/signal",
-                "launch_order": 3,
+                "launch_order": 2,
                 "volumes": {
                     "/data": {
                         "description": "Choose a Share for all the bridge data. Eg: create a Share called mautrix-signal for this purpose.",
