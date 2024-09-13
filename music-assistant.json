@@ -1,0 +1,29 @@
+{
+    "music-assistant": {
+        "description": "Music Assistant is a music library manager for your offline and online music sources which can easily stream your favourite music to a wide range of supported players and be combined with the power of Home Assistant!",
+        "website": "https://music-assistant.io/",
+        "version": "1.0",
+        "containers": {
+            "music-assistant": {
+                "image": "ghcr.io/music-assistant/server",
+                "launch_order": 1,
+                "opts": [
+                    [
+                        "--network",
+                        "host"
+                    ],
+                    [
+                        "--privileged",
+                        ""
+                    ]
+                ],
+                "volumes": {
+                    "/data": {
+                        "label": "data",
+                        "description": "Share containing the music assistant data."
+                    }
+                }
+            }
+        }
+    }
+}
