@@ -7,7 +7,7 @@
         "website": "https://www.zigbee2mqtt.io/",
         "version": "1.0",
         "containers": {
-            "mosquitto": {
+            "zmosquitto": {
                 "image": "eclipse-mosquitto",
                 "tag": "2.0",
                 "launch_order": 1,

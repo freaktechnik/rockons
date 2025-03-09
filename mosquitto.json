@@ -1,0 +1,46 @@
+{
+    "mosquitto": {
+        "description": "Eclipse Mosquitto is an open source (EPL/EDL licensed) message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers.",
+        "ui": {
+            "slug": ""
+        },
+        "website": "https://mosquitto.org/",
+        "version": "1.0",
+        "containers": {
+            "mosquitto": {
+                "image": "eclipse-mosquitto",
+                "tag": "2",
+                "launch_order": 1,
+                "ports": {
+                    "1883": {
+                        "label": "MQTT",
+                        "description": "Port to run the service on. Defaults to 1883",
+                        "host_default": 1883
+                    }
+                },
+                "cmd_arguments": [
+                    [
+                        "mosquitto",
+                        ""
+                    ],
+                    [
+                        "-c",
+                        "/mosquitto-no-auth.conf"
+                    ]
+                ],
+                "environment": {
+                    "TZ": {
+                        "label": "Timezone",
+                        "description": "List of available values at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List"
+                    }
+                },
+                "volumes": {
+                    "/mosquitto": {
+                        "label": "mosquitto Data",
+                        "description": "Share containing the mosquitto data."
+                    }
+                }
+            }
+        }
+    }
+}

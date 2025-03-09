@@ -39,3 +39,6 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | synatainer | SImple to configure via env vars. | :heavy_check_mark: |
 | bonob | Config via env vars, customized to what my setup needs. | :heavy_check_mark: |
 | ntfy | Configuration via config file recommended. | :heavy_check_mark: |
+| mosquitto | | :heavy_check_mark: |
+| homeassistant-zigbee | Same as the official one, just also has a zigbee serial device config option. | :heavy_check_mark: |
+| hassio-thread-matter | Medium, but might just work... | :heavy_check_mark: |
