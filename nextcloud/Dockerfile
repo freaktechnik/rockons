@@ -1,5 +1,5 @@
 # From https://github.com/nextcloud/docker/blob/master/.examples/dockerfiles/full/fpm/Dockerfile
-FROM nextcloud:31.0.7-fpm
+FROM nextcloud:31.0.8-fpm
 
 # ENV PHP_UPLOAD_LIMIT 10G -> nextcloud.ini
 
