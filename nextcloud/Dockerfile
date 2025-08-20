@@ -37,7 +37,6 @@ RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         libbz2-dev \
-        libc-client-dev \
         libkrb5-dev \
         libsmbclient-dev \
         libpq-dev \
@@ -45,22 +44,12 @@ RUN set -ex; \
     \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
     docker-php-ext-install \
-        bcmath \
-        exif \
-        gmp \
-        intl \
-        opcache \
-        pcntl \
-        pdo_pgsql \
-        sysvsem \
-        zip \
         bz2 \
         imap \
         pgsql \
-        ftp \
     ; \
     pecl install smbclient; \
-    docker-php-ext-enable smbclient igbinary apcu memcached redis; \
+    docker-php-ext-enable smbclient; \
     \
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
     apt-mark auto '.*' > /dev/null; \
