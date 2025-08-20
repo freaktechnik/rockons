@@ -80,7 +80,7 @@ RUN set -ex; \
         python3-scipy \
         python3-pywt \
         python3-pip \
-        python3-distutils \
+        python3-setuptools \
     ; \
     rm -rf /var/lib/apt/lists/*
 
