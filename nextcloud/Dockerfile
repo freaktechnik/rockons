@@ -22,7 +22,7 @@ RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         ffmpeg \
-        libmagickcore-6.q16-6-extra \
+        libmagickcore-7.q16-10-extra \
         procps \
         smbclient \
         supervisor \
@@ -45,12 +45,22 @@ RUN set -ex; \
     \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
     docker-php-ext-install \
+        bcmath \
+        exif \
+        gmp \
+        intl \
+        opcache \
+        pcntl \
+        pdo_pgsql \
+        sysvsem \
+        zip \
         bz2 \
         imap \
         pgsql \
+        ftp \
     ; \
     pecl install smbclient; \
-    docker-php-ext-enable smbclient; \
+    docker-php-ext-enable smbclient igbinary apcu memcached redis; \
     \
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
     apt-mark auto '.*' > /dev/null; \
