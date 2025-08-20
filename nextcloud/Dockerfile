@@ -45,7 +45,6 @@ RUN set -ex; \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl; \
     docker-php-ext-install \
         bz2 \
-        imap \
         pgsql \
     ; \
     pecl install smbclient; \
@@ -64,6 +63,11 @@ RUN set -ex; \
     \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
     rm -rf /var/lib/apt/lists/*
+    
+# IMAP extension needs lib that isn't bundled
+RUN  --mount=type=bind,from=ghcr.io/mlocati/php-extension-installer:latest,source=/usr/bin/install-php-extensions,target=/usr/local/bin/install-php-extensions \
+    install-php-extensions imap
+    
 
 # MediaDC https://github.com/andrey18106/mediadc/issues/27, https://github.com/andrey18106/mediadc/wiki/Manual-install
 
