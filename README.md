@@ -43,3 +43,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | homeassistant-zigbee | Same as the official one, just also has a zigbee serial device config option. | :heavy_check_mark: |
 | hassio-thread-matter | Medium, but might just work... | :heavy_check_mark: |
 | dmarc-report-viewer | Needs a bunch of env vars that get set, but very easy other than that. | :heavy_check_mark: |
+| minioplus | Was based on the official MinIO rockon (still using the official container), but enhanced to allow specifying the `MINIO_DOMAIN`. See also https://github.com/rockstor/rockon-registry/issues/443 | :heyvy_check_mark: |
