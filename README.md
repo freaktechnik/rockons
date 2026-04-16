@@ -33,7 +33,7 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | drone | Set up for usage with the gitea/forgejo rockon, provides a single runner. | :heavy_check_mark: |
 | chrony | Super simple if you know a friendly neighbourhood NTP server to chain from | :heavy_check_mark: |
 | zigbee2mqtt (+mosquitto) | Needs an initial config file to be manually generated. | :heavy_check_mark: |
-| nextcloud-plus | Built to migrate from an existing nextcloud official + postgres setup to this. | :heavy_check_mark: |
+| nextcloud-plus | Built to migrate from an existing nextcloud official + postgres setup to this. Needs a separate nginx instance to consume the fpm handler and do some redirecting. See also the docker container in this repo. | :heavy_check_mark: |
 | up-common-proxies | Simple to set up. | :heavy_check_mark: |
 | calibre | | :heavy_check_mark: |
 | synatainer | SImple to configure via env vars. | :heavy_check_mark: |
