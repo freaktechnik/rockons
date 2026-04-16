@@ -1,0 +1,58 @@
+{
+    "Bazarr": {
+        "containers": {
+            "Bazarr": {
+                "image": "linuxserver/bazarr",
+                "launch_order": 1,
+                "opts": [
+                    [
+                    "-v",
+                    "/dev/rtc:/dev/rtc:ro"
+                    ]
+                ],
+                "ports": {
+                    "6767": {
+                        "description": "Bazarr WebUI port. Suggested default: 6767",
+                        "host_default": 6767,
+                        "label": "WebUI port",
+                        "protocol": "tcp",
+                        "ui": true
+                    }
+                },
+                "volumes": {
+                    "/config": {
+                        "description": "Choose a Share for Bazarr configuration. Eg: create a Share called bazarr-config for this purpose alone.",
+                        "label": "Config Storage"
+                    },
+                    "/movies": {
+                        "description": "Choose a Share where Radarr stores movies. Eg: create a Share called movies for this purpose alone.",
+                        "label": "Movie Storage"
+                    },
+                    "/tv": {
+                        "description": "Choose a Share where Sonarr stores TV shows. Eg: create a Share called tv for this purpose alone.",
+                        "label": "TV Show Storage"
+                    }
+                },
+                "environment": {
+                    "PUID": {
+                        "description": "Enter a valid UID to run Bazarr as. It must have full permissions to all Shares mapped in the previous step.",
+                        "label": "UID to run Bazarr as.",
+                        "index": 1
+                    },
+                    "PGID": {
+                        "description": "Enter a valid GID to use along with the above UID. It(or the above UID) must have full permissions to all Shares mapped in the previous step.",
+                        "label": "GID to run Bazarr as.",
+                        "index": 2
+                    }
+                }
+            }
+        },
+        "description": "Bazarr is a companion application to Sonarr and Radarr that manages and downloads subtitles based on your requirements.<p>Based on a custom docker image: <a href='https://hub.docker.com/r/linuxserver/bazarr' target='_blank'>https://hub.docker.com/r/linuxserver/bazarr</a>, available for amd64 and arm64 architecture.</p>",
+        "ui": {
+            "slug": ""
+        },
+        "volume_add_support": true,
+        "website": "https://www.bazarr.media/",
+        "version": "1.0"
+    }
+}

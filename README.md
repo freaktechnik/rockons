@@ -36,7 +36,7 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | nextcloud-plus | Built to migrate from an existing nextcloud official + postgres setup to this. Needs a separate nginx instance to consume the fpm handler and do some redirecting. See also the docker container in this repo. | :heavy_check_mark: |
 | up-common-proxies | Simple to set up. | :heavy_check_mark: |
 | calibre | | :heavy_check_mark: |
-| synatainer | SImple to configure via env vars. | :heavy_check_mark: |
+| synatainer | Simple to configure via env vars. | :heavy_check_mark: |
 | bonob | Config via env vars, customized to what my setup needs. | :heavy_check_mark: |
 | ntfy | Configuration via config file recommended. | :heavy_check_mark: |
 | mosquitto | | :heavy_check_mark: |
@@ -45,3 +45,4 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 | dmarc-report-viewer | Needs a bunch of env vars that get set, but very easy other than that. | :heavy_check_mark: |
 | minioplus | Was based on the official MinIO rockon (still using the official container), but enhanced to allow specifying the `MINIO_DOMAIN`. See also https://github.com/rockstor/rockon-registry/issues/443 | :heavy_check_mark: |
 | mediathekarr | Should work out of the box, follow the web UI for configuration. | :heavy_check_mark: |
+| Bazarr | Requires barely any setup, though can be fairly slow. | :heavy_check_mark: |
