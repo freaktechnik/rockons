@@ -14,7 +14,7 @@ The Rock-ons in this repo are tweaked to offer exactly the customizability I req
 
 | rockon | usability | working | upstreamed |
 |--------|-----------|---------|------------|
-| funkwhale | env config and user setup is a bit cumbersome | :heavy_check_mark: |
+| funkwhale | env config and user setup is a bit cumbersome. The setup as provided here doesn't quite work due to all the interdependencies. For my deployment I've split this into three rockons I have to install and launch in the correct order. | :negative_squared_cross_mark: |
 | forgejo | easy - env v.s setup config a bit confusing | :heavy_check_mark: |
 | gitea | easy - env vs. setup config a bit confusing | :heavy_check_mark: |
 | huginn | not used it much yet, possibly missing an env var to add additional agents | :heavy_check_mark: |
