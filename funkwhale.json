@@ -181,6 +181,10 @@
                     [
                         "--mount",
                         "type=tmpfs,destination=/srv/funkwhale/data/music"
+                    ],
+                    [
+                        "-e",
+                        "FUNKWHALE_API_PORT=5000"
                     ]
                 ],
                 "environment": {
